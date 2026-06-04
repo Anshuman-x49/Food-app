@@ -18,6 +18,20 @@ authRouter.post("/register", authController.registerUser)
 authRouter.post("/login", authController.loginUser)
 
 /**
+* @desc get logged in user
+* @route GET /api/v1/auth/get-me
+* @access private
+*/
+authRouter.get("/get-me", authController.getMe)
+
+/**
+* @desc refresh token
+* @route POST /api/v1/auth/refresh-token
+* @access private
+*/
+authRouter.post("/refresh-token", authController.refreshToken)
+
+/**
 * @desc logout user
 * @route POST /api/v1/auth/logout
 * @access public
