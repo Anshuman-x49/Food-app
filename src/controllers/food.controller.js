@@ -1,10 +1,16 @@
 import foodModel from "../models/food.model.js"
 
+
+/**
+ * @desc add food
+ * @route POST /api/v1/food/add-food
+ * @access protected
+ */
 const addFood = async (req, res) => {
     try {
         const foodData = req.body
 
-        if(!foodData.name || !foodData.price || !foodData.description){
+        if(!foodData.name || !foodData.price || !foodData.description || !foodData.image || !foodData.category){
             return res.status(400).json({
                 success: false,
                 message: "All fields are required"

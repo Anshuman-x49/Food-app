@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import config from "../config/config.js";
 
 const authMiddleware = (req, res, next) => {
     const token = req.cookies.refreshToken || req.headers.authorization?.split(" ")[1]

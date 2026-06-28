@@ -55,9 +55,9 @@ const verifyToken = (token) => {
 // ─── Controllers ────────────────────────────────────────────────────────────
 
 /**
- * @desc   Register a new user
- * @route  POST /api/v1/auth/register
- * @access Public
+ * @desc register a new user
+ * @route POST /api/v1/auth/register
+ * @access public
  */
 const registerUser = async (req, res) => {
   try {
@@ -119,9 +119,9 @@ const registerUser = async (req, res) => {
 };
 
 /**
- * @desc   Login an existing user
- * @route  POST /api/v1/auth/login
- * @access Public
+ * @desc login an existing user
+ * @route POST /api/v1/auth/login
+ * @access public
  */
 const loginUser = async (req, res) => {
   try {
@@ -181,9 +181,9 @@ const loginUser = async (req, res) => {
 };
 
 /**
- * @desc   Get the currently authenticated user
- * @route  GET /api/v1/auth/get-me
- * @access Private (requires valid access token in Authorization header)
+ * @desc get the currently authenticated user
+ * @route GET /api/v1/auth/get-me
+ * @access private
  */
 const getMe = async (req, res) => {
   try {
@@ -250,9 +250,9 @@ const getMe = async (req, res) => {
 };
 
 /**
- * @desc   Issue a new access token (and rotate the refresh token)
- * @route  POST /api/v1/auth/refresh-token
- * @access Private (requires valid refresh token cookie)
+ * @desc issue a new access token (and rotate the refresh token)
+ * @route POST /api/v1/auth/refresh-token
+ * @access private
  */
 const refreshToken = async (req, res) => {
   try {
@@ -328,9 +328,9 @@ const refreshToken = async (req, res) => {
 };
 
 /**
- * @desc   Logout the current user
- * @route  POST /api/v1/auth/logout
- * @access Private (requires valid refresh token cookie)
+ * @desc logout the current user
+ * @route POST /api/v1/auth/logout
+ * @access private
  */
 const logoutUser = async (req, res) => {
   try {
