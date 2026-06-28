@@ -10,8 +10,16 @@ app.use(express.static("public"))
 app.use(cookieParser())
 app.use(cors())
 
+/**
+ * Auth routes
+ */
 import authRoutes from "./routes/auth.route.js"
-
 app.use("/api/v1/auth", authRoutes)
+
+/**
+ * Food routes
+ */
+import foodRoutes from "./routes/food.route.js"
+app.use("/api/v1/food", foodRoutes)
 
 export default app
