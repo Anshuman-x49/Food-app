@@ -22,4 +22,10 @@ app.use("/api/v1/auth", authRoutes)
 import foodRoutes from "./routes/food.route.js"
 app.use("/api/v1/food", foodRoutes)
 
+/**
+ * Error handler middleware
+ */
+import multerErrorHandler from "./middlewares/multer-error.middleware.js"
+app.use(multerErrorHandler)
+
 export default app

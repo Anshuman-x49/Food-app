@@ -1,5 +1,6 @@
 import foodModel from "../models/food.model.js"
-
+import { v4 as uuidv4 } from "uuid"
+import { uploadFile } from "../services/storage.service.js"
 
 /**
  * @desc add food
@@ -10,23 +11,30 @@ const addFood = async (req, res) => {
     try {
         const foodData = req.body
 
-        if(!foodData.name || !foodData.price || !foodData.description || !foodData.image || !foodData.category){
+        const foodFile = req.file
+
+        if(!foodData.name || !foodData.price || !foodData.description || !foodFile || !foodData.category){
             return res.status(400).json({
                 success: false,
                 message: "All fields are required"
             })
         }
 
-        const food = await foodModel.create({
+        const fileResult = await uploadFile(foodFile, uuidv4())
+
+        const foodItem = await foodModel.create({
             name: foodData.name,
             description: foodData.description,
-            price: foodData.price
+            image: fileResult.url,
+            category: foodData.category,
+            price: foodData.price,
+            partner: req.user.id
         })
 
         return res.status(201).json({
             success: true,
             message: "Food added successfully",
-            data: food
+            data: foodItem
         })
     } catch (error) {
         console.error(error)
