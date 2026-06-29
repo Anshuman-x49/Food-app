@@ -12,11 +12,11 @@ const imageKit = new ImageKit({
  * @param {Object} file
  * @returns {Promise<Object>}
  */
-export const uploadFile = async (file) => {
+export const uploadFile = async (file, fileName) => {
     try {
         const result = await imageKit.upload({
             file: file.buffer,
-            fileName: file.originalname,
+            fileName: fileName || file.originalname,
             folder: "food-app"
         })
         return result

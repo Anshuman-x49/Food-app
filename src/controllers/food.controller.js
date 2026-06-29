@@ -25,7 +25,7 @@ const addFood = async (req, res) => {
         const foodItem = await foodModel.create({
             name: foodData.name,
             description: foodData.description,
-            image: fileResult.url,
+            media: fileResult.url,
             category: foodData.category,
             price: foodData.price,
             partner: req.user.id

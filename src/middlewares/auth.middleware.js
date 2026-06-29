@@ -1,5 +1,6 @@
 import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
+import config from "../config/config.js";
 
 const authMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1]
@@ -16,6 +17,13 @@ const authMiddleware = async (req, res, next) => {
 
         const foodPartner = await userModel.findById(decoded.id)
 
+        if (!foodPartner) {
+          return res.status(401).json({
+            success: false,
+            message: "User not found",
+          });
+        }
+
         if (foodPartner.role !== "partner") {
           return res.status(403).json({
             success: false,
@@ -23,11 +31,17 @@ const authMiddleware = async (req, res, next) => {
           });
         }
 
-        req.foodPartner = foodPartner
+        req.user = foodPartner
 
         next()
     } catch (error) {
-        console.error(error)
+        console.error("Auth middleware error:", error.message)
+        if (error.name === "TokenExpiredError") {
+            return res.status(401).json({
+                success: false,
+                message: "Access token expired, please refresh"
+            })
+        }
         return res.status(401).json({
             success: false,
             message: "Invalid token"
